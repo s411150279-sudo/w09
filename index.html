@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="喵日子 Cat Studio，提供貓咪美容、日常照護與健康衛教資訊。">
+  <title>喵日子 Cat Studio｜貓咪美容工作室</title>
+  <style>
+    /* ===== 全站基本設定 ===== */
+    :root {
+      --cream: #fbf7f1;
+      --beige: #efe3d5;
+      --brown: #76523c;
+      --brown-light: #98765d;
+      --ink: #40352e;
+      --white: #ffffff;
+      --accent: #c58e62;
+      --shadow: 0 12px 32px rgba(90, 65, 46, .09);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+      color: var(--ink);
+      background: var(--cream);
+      line-height: 1.75;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    .container { width: min(1100px, 92%); margin: 0 auto; }
+
+    /* ===== 導覽列 ===== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(251, 247, 241, .94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(118, 82, 60, .12);
+    }
+    .nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .brand { color: var(--brown); font-weight: 800; font-size: 1.25rem; }
+    .brand small { display: block; font-size: .65rem; letter-spacing: .18em; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 22px; font-size: .92rem; }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ===== 首頁主視覺 ===== */
+    .hero {
+      min-height: 520px;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      align-items: center;
+      gap: 42px;
+      padding: 70px 0;
+    }
+    .eyebrow {
+      color: var(--brown-light);
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+    }
+    h1 {
+      margin: 12px 0;
+      color: var(--brown);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      line-height: 1.15;
+    }
+    .hero p { max-width: 520px; color: #75665b; }
+    .hero-image {
+      width: 100%;
+      height: 390px;
+      object-fit: cover;
+      border-radius: 34px 34px 110px 34px;
+      box-shadow: var(--shadow);
+    }
+    .button {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 11px 23px;
+      color: var(--white);
+      background: var(--brown);
+      border: 0;
+      border-radius: 999px;
+      cursor: pointer;
+      font: inherit;
+      transition: transform .2s, background .2s;
+    }
+    .button:hover { background: var(--accent); transform: translateY(-2px); }
+
+    /* ===== 共用區塊 ===== */
+    section { padding: 72px 0; }
+    section:nth-of-type(even) { background: #f4ece3; }
+    .section-heading { text-align: center; margin-bottom: 36px; }
+    .section-heading span { color: var(--brown-light); font-size: .8rem; letter-spacing: .2em; }
+    h2 { color: var(--brown); font-size: clamp(1.8rem, 4vw, 2.5rem); margin: 5px 0; }
+    .section-heading p { color: #837367; margin: 6px auto 0; }
+    .card {
+      padding: 25px;
+      background: var(--white);
+      border: 1px solid rgba(118, 82, 60, .08);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    /* ===== 工作室介紹 ===== */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: center; }
+    .about-image { width: 100%; height: 330px; object-fit: cover; border-radius: 24px; }
+    .info-list { padding: 0; list-style: none; }
+    .info-list li { padding: 9px 0; border-bottom: 1px solid #eee4da; }
+    .info-list strong { color: var(--brown); }
+    .notice { color: #9b806a; font-size: .82rem; }
+
+    /* ===== 年齡換算器 ===== */
+    .calculator { max-width: 570px; margin: auto; }
+    label { display: block; color: var(--brown); font-weight: 700; margin-bottom: 8px; }
+    input {
+      width: 100%;
+      padding: 13px 15px;
+      border: 1px solid #d9c7b7;
+      border-radius: 12px;
+      background: #fff;
+      font: inherit;
+      color: var(--ink);
+    }
+    input:focus { outline: 2px solid #c58e62; border-color: transparent; }
+    .result {
+      margin-top: 18px;
+      padding: 22px;
+      text-align: center;
+      background: var(--cream);
+      border-radius: 16px;
+    }
+    .result strong { display: block; color: var(--brown); font-size: 2.4rem; }
+    .small-note { color: #89796d; font-size: .82rem; }
+
+    /* ===== 衛教卡片 ===== */
+    .education-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .education-card h3 { color: var(--brown); margin: 14px 0 6px; }
+    .education-card p { margin: 0; color: #74675d; }
+    .education-card .symbol { font-size: 2rem; }
+
+    /* ===== 價目表 ===== */
+    .price-list { max-width: 760px; margin: auto; }
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 17px 0;
+      border-bottom: 1px solid #eee4da;
+    }
+    .price-row:last-child { border-bottom: 0; }
+    .price-row strong { color: var(--brown); white-space: nowrap; }
+    .price-desc { display: block; color: #8b7b70; font-size: .86rem; }
+
+    /* ===== 頁尾 ===== */
+    footer { padding: 34px 0; text-align: center; color: #e9ddd2; background: #594333; }
+    footer strong { color: white; font-size: 1.2rem; }
+    footer p { margin: 5px 0; font-size: .88rem; }
+
+    /* ===== 手機版排版 ===== */
+    @media (max-width: 760px) {
+      .nav { align-items: flex-start; flex-direction: column; padding: 14px 0; }
+      .nav-links { gap: 12px; font-size: .82rem; }
+      .hero { grid-template-columns: 1fr; padding: 48px 0; gap: 24px; }
+      .hero-image { height: 280px; }
+      .about-grid, .education-grid { grid-template-columns: 1fr; }
+      section { padding: 54px 0; }
+      .about-image { height: 260px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- 網站導覽列：可快速前往各項評分內容 -->
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#home">喵日子 Cat Studio<small>CAT GROOMING & CARE</small></a>
+      <nav class="nav-links" aria-label="主要導覽">
+        <a href="#about">工作室介紹</a>
+        <a href="#calculator">年齡換算</a>
+        <a href="#education">健康衛教</a>
+        <a href="#prices">服務價目</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- 首頁主視覺 -->
+    <div class="container hero" id="home">
+      <div>
+        <div class="eyebrow">A LITTLE LOVE FOR EVERY CAT</div>
+        <h1>讓每一天<br>都有喵的幸福。</h1>
+        <p>喵日子 Cat Studio 提供細心的貓咪美容與日常照護資訊，陪伴每隻貓咪維持乾淨、舒適與健康。</p>
+        <a class="button" href="#about">認識我們</a>
+      </div>
+      <img class="hero-image"
+        src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=1100&q=85"
+        alt="坐著的橘白貓">
+    </div>
+
+    <!-- ① 工作室名稱、服務項目、電話及地址 -->
+    <section id="about">
+      <div class="container">
+        <div class="section-heading">
+          <span>ABOUT OUR STUDIO</span>
+          <h2>關於喵日子</h2>
+          <p>以耐心與專業，照顧每一位毛茸茸的家人。</p>
+        </div>
+        <div class="about-grid">
+          <img class="about-image"
+            src="https://images.unsplash.com/photo-1513360371669-4adf3dd7dff8?auto=format&fit=crop&w=1000&q=85"
+            alt="貓咪美容照護情境">
+          <div class="card">
+            <h3 style="color: var(--brown); margin-top: 0;">喵日子 Cat Studio</h3>
+            <p>提供貓咪洗澡、吹毛、梳毛、剪指甲、耳朵清潔及基礎美容服務。我們重視每隻貓咪的個性與需求，依照貓咪狀況安排合適的照護流程，讓美容過程更加安心。</p>
+            <ul class="info-list">
+              <li><strong>服務項目：</strong>貓咪洗澡、梳毛、剪指甲、耳朵清潔、基礎美容</li>
+              <li><strong>聯絡電話：</strong><a href="tel:0912345678">0912-345-678</a></li>
+              <li><strong>工作室地址：</strong>台南市東區幸福路 100 號</li>
+              <li><strong>營業時間：</strong>週二至週日 10:00～19:00（採預約制）</li>
+            </ul>
+            <p class="notice">※ 電話、地址與營業時間為課堂作業展示用虛構資料，正式使用前請替換。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ② 可互動的貓咪年齡換算功能 -->
+    <section id="calculator">
+      <div class="container">
+        <div class="section-heading">
+          <span>CAT AGE CALCULATOR</span>
+          <h2>貓咪年齡換算器</h2>
+          <p>輸入貓咪年齡，快速估算相當於人類的年齡。</p>
+        </div>
+        <div class="card calculator">
+          <label for="catAge">貓咪目前幾歲？</label>
+          <input id="catAge" type="number" min="0" max="30" step="0.1" value="3" placeholder="例如：3">
+          <button class="button" id="calculateBtn" type="button">開始換算</button>
+          <div class="result" aria-live="polite">
+            <span id="resultLabel">貓咪 3 歲約相當於人類</span>
+            <strong id="humanAge">28 歲</strong>
+            <span>以上為概略估算，實際老化速度會因健康與生活狀況而異。</span>
+          </div>
+          <p class="small-note">換算參考：貓咪第 1 年約等於人類 15 歲，第 2 年約等於 24 歲；之後每增加 1 個貓咪年齡，約增加 4 個人類年齡。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ③ 符合貓咪工作室主題的健康衛教知識 -->
+    <section id="education">
+      <div class="container">
+        <div class="section-heading">
+          <span>CAT HEALTH EDUCATION</span>
+          <h2>貓咪健康小教室</h2>
+          <p>從日常照護開始，建立良好的健康習慣。</p>
+        </div>
+        <div class="education-grid">
+          <article class="card education-card">
+            <div class="symbol" aria-hidden="true">💧</div>
+            <h3>一、維持充足飲水</h3>
+            <p>每天提供乾淨飲用水，並定期清洗水碗。可在家中不同位置放置水碗，或使用流動飲水器。若貓咪頻繁進出貓砂盆卻尿不出來，應立即就醫。</p>
+          </article>
+          <article class="card education-card">
+            <div class="symbol" aria-hidden="true">🪮</div>
+            <h3>二、定期梳理毛髮</h3>
+            <p>依照毛長與毛量安排梳毛頻率，長毛貓通常需要更頻繁梳理。梳毛有助於減少廢毛與打結，也能及早留意皮膚紅腫、脫毛或皮屑等異常。</p>
+          </article>
+          <article class="card education-card">
+            <div class="symbol" aria-hidden="true">🩺</div>
+            <h3>三、定期健康檢查</h3>
+            <p>依年齡、生活環境與健康狀況，和獸醫討論疫苗及寄生蟲預防計畫。若出現食慾下降、精神不佳或體重明顯變化，應儘早安排獸醫檢查。</p>
+          </article>
+        </div>
+        <p class="small-note" style="text-align:center; margin-top:18px;">健康資訊僅供一般衛教參考，個別診斷與治療請諮詢獸醫師。</p>
+      </div>
+    </section>
+
+    <!-- ④ 符合工作室主題的美容服務價目表 -->
+    <section id="prices">
+      <div class="container">
+        <div class="section-heading">
+          <span>SERVICE & PRICE</span>
+          <h2>美容服務價目表</h2>
+          <p>依貓咪毛況、體型與實際照護需求確認費用。</p>
+        </div>
+        <div class="card price-list">
+          <div class="price-row">
+            <div>短毛貓洗澡<span class="price-desc">清潔、洗澡、吹毛與梳毛</span></div>
+            <strong>NT$ 600 起</strong>
+          </div>
+          <div class="price-row">
+            <div>長毛貓洗澡<span class="price-desc">清潔、吹整與毛髮梳理</span></div>
+            <strong>NT$ 900 起</strong>
+          </div>
+          <div class="price-row">
+            <div>剪指甲<span class="price-desc">修剪指甲與基本檢查</span></div>
+            <strong>NT$ 150 起</strong>
+          </div>
+          <div class="price-row">
+            <div>耳朵清潔<span class="price-desc">耳部外觀檢查與清潔</span></div>
+            <strong>NT$ 150 起</strong>
+          </div>
+          <div class="price-row">
+            <div>基礎美容套餐<span class="price-desc">洗澡、吹毛、梳毛、剪指甲與耳朵清潔</span></div>
+            <strong>NT$ 1,000 起</strong>
+          </div>
+          <p class="notice">※ 本價目表為課堂作業示範價格，實際收費依貓咪狀況及服務內容調整。</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 頁尾資訊 -->
+  <footer>
+    <div class="container">
+      <strong>喵日子 Cat Studio</strong>
+      <p>用心呵護，讓每隻貓咪都能幸福生活。</p>
+      <p>© 2026 Cat Studio｜課堂作業展示網站</p>
+    </div>
+  </footer>
+
+  <script>
+    // 貓咪年齡換算：第 1 年約 15 歲、第 2 年約 24 歲，之後每年增加約 4 歲。
+    function convertCatAge(age) {
+      if (age <= 1) return age * 15;
+      if (age <= 2) return 15 + (age - 1) * 9;
+      return 24 + (age - 2) * 4;
+    }
+
+    // 讀取輸入值、檢查範圍，再更新頁面上的換算結果。
+    function calculateAge() {
+      const ageInput = document.getElementById("catAge");
+      const resultLabel = document.getElementById("resultLabel");
+      const humanAgeOutput = document.getElementById("humanAge");
+      const age = Number(ageInput.value);
+
+      // 避免空值、負數及不合理的年齡進入計算。
+      if (ageInput.value.trim() === "" || !Number.isFinite(age) || age < 0 || age > 30) {
+        resultLabel.textContent = "請輸入 0 至 30 歲之間的有效年齡";
+        humanAgeOutput.textContent = "—";
+        return;
+      }
+
+      const humanAge = convertCatAge(age);
+      resultLabel.textContent = `貓咪 ${age} 歲約相當於人類`;
+      humanAgeOutput.textContent = `${Number(humanAge.toFixed(1))} 歲`;
+    }
+
+    // 點擊按鈕時計算；按 Enter 也能觸發計算。
+    document.getElementById("calculateBtn").addEventListener("click", calculateAge);
+    document.getElementById("catAge").addEventListener("keydown", (event) => {
+      if (event.key === "Enter") calculateAge();
+    });
+
+    // 網頁載入後先顯示預設年齡的計算結果。
+    calculateAge();
+  </script>
+</body>
+</html>
